@@ -8,6 +8,7 @@
 
 Описание:
 Реализованы 2 версии веб-сервера:
+
 1) new thread per conn, blocking I/O,
     accept in main, java.net.*
     
