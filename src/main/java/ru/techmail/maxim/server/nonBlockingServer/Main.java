@@ -68,6 +68,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        new Main().start(8080, 4);
+        ru.techmail.maxim.server.blockingServer.Main main = new ru.techmail.maxim.server.blockingServer.Main();
+        main.readArgs(args);
+        new Main().start(main.getPort(), main.getCoresCount() * 2);
     }
 }

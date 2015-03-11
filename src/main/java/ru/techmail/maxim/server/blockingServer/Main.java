@@ -13,10 +13,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 	private static final Logger LOG = LoggerFactory.getLogger(Main.class);
-    private static int port = 8080;
-    private static int coresCount = 2;
+    private int port;
+    private int coresCount;
 
-    private static void parseArgs(String[] args, int iter) {
+    public Main() {
+        port = 8080;
+        coresCount = 2;
+    }
+
+    private void parseArgs(String[] args, int iter) {
         switch (args[iter]) {
             case "-p" :
                 try {
@@ -38,7 +43,7 @@ public class Main {
         }
     }
 
-	public static void main(String[] args) throws Exception {
+    public void readArgs(String[] args) {
         switch (args.length) {
             case 2 :
                 parseArgs(args, 0);
@@ -53,11 +58,24 @@ public class Main {
                 parseArgs(args, 4);
                 break;
         }
-		try(ServerSocket serverSocket = new ServerSocket(port)) {
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public int getCoresCount() {
+        return coresCount;
+    }
+
+	public static void main(String[] args) throws Exception {
+        Main main = new Main();
+        main.readArgs(args);
+		try(ServerSocket serverSocket = new ServerSocket(main.port)) {
             AtomicInteger threadsCount = new AtomicInteger(0);
 			while(true) {
 				try {
-                    while (threadsCount.get() > coresCount * 10) {
+                    while (threadsCount.get() > main.coresCount * 10) {
                         Thread.sleep(10);
                     }
 					Socket clientSocket = serverSocket.accept();
@@ -72,7 +90,7 @@ public class Main {
 				}
 			}
 		} catch (IOException e) {
-		    LOG.error("Failed starting server on port: " + port);
+		    LOG.error("Failed starting server on port: " + main.port);
 		    System.exit(-1);
 		}
 	}

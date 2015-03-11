@@ -47,10 +47,6 @@ public class FileServer {
             return false;
         }
     }
-
-    private static boolean isFileExists() {
-        return true;
-    }
 	
 	public static File getFile(String path) throws FileNotFoundException, ForbiddenException {
 		Path completePath;
