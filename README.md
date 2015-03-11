@@ -11,7 +11,7 @@
 
 1) new thread per conn, blocking I/O,
     accept in main, java.net.*
-    
+
 2) thread pool, non-blocking I/O,
     accept in main, java.nio.*,
     use DMA mode for transfer files
