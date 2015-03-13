@@ -27,8 +27,6 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
-
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -44,8 +42,8 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <!--<mainClass>ru.techmail.maxim.server.blockingServer.Main</mainClass>-->
-                    <mainClass>ru.techmail.maxim.server.nonBlockingServer.Main</mainClass>
+                    <mainClass>ru.techmail.maxim.server.blockingServer.Main</mainClass>
+                    <!--<mainClass>ru.techmail.maxim.server.nonBlockingServer.Main</mainClass>-->
                 </configuration>
             </plugin>
 
@@ -62,8 +60,8 @@
                     <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
-                            <!--<mainClass>ru.techmail.maxim.server.blockingServer.Main</mainClass>-->
-                            <mainClass>ru.techmail.maxim.server.nonBlockingServer.Main</mainClass>
+                            <mainClass>ru.techmail.maxim.server.blockingServer.Main</mainClass>
+                            <!--<mainClass>ru.techmail.maxim.server.nonBlockingServer.Main</mainClass>-->
                         </manifest>
                     </archive>
 

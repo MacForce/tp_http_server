@@ -41,13 +41,26 @@ public class Worker {
 	}
 
     public void read(SelectionKey key) throws IOException {
-        if (request.getMethod() == null &&
-                (clientSocket.read(buff) == -1 || buff.get(buff.position()-1) == '\n')) {
+        int read = clientSocket.read(buff);
+        LOG.debug("{}", read);
+        if (read == -1 || isRequestEnd()) {
             readRequest(key);
             buff.clear();
         } else {
             key.interestOps(SelectionKey.OP_READ);
         }
+    }
+
+    private boolean isRequestEnd() {
+        if (buff.position() > 3) {
+            if (buff.get(buff.position() - 1) == '\n' &&
+                    buff.get(buff.position() - 2) == '\r' &&
+                    buff.get(buff.position() - 3) == '\n' &&
+                    buff.get(buff.position() - 4) == '\r') {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void write(SelectionKey key) throws IOException {

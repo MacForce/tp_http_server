@@ -35,7 +35,7 @@ public class Main {
                 break;
             case "-c" :
                 try {
-                    port = Integer.valueOf(args[iter + 1]);
+                    coresCount = Integer.valueOf(args[iter + 1]);
                 } catch (NumberFormatException e) {
                     LOG.error("Wrong format of port value (used default cores count: 2)");
                 }
